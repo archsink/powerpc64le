@@ -24,7 +24,7 @@ jobs:
     - name: Install system dependencies
       run: sudo apt-get install -y tree
     - name: Update submodule
-      working-directory: src
+      working-directory: pkgbuilds
       run: |
         git submodule update --init
         git checkout main
@@ -58,9 +58,9 @@ jobs:
     - name: Output build trees for debugging
       run: |
         echo "==> Build tree"
-        tree src/build
+        tree pkgbuilds/build
         echo "==> Database tree"
-        tree src/db
+        tree pkgbuilds/db
     - name: Set up Git config
       run: |
         git config --global user.name "github-actions[bot]"
@@ -78,4 +78,4 @@ jobs:
       run: |
         tag="$(date '+%Y-%m-%d-%H-%M')"
         gh release create --title "$tag" "$tag" || true
-        gh release upload --clobber "$tag" src/db/*
+        gh release upload --clobber "$tag" pkgbuilds/db/*
