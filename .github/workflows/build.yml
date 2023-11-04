@@ -42,8 +42,8 @@ jobs:
         --env BUILDER_GID=$(id -g)
         --platform "${{ matrix.platform }}"
         --mount type=bind,src="$PWD",dst="/src/${{ github.repository }}"
-        --workdir "/src/${{ github.repository }}/src"
-        --entrypoint "/src/${{ github.repository }}/src/with-builder-user"
+        --workdir "/src/${{ github.repository }}/pkgbuilds"
+        --entrypoint "/src/${{ github.repository }}/pkgbuilds/with-builder-user"
         ghcr.io/fwcd/archlinux
         ./build-pkgs
     - name: Build package database
@@ -52,7 +52,7 @@ jobs:
         --rm
         --user "$(id -u):$(id -g)"
         --mount type=bind,src="$PWD",dst="/src/${{ github.repository }}"
-        --workdir "/src/${{ github.repository }}/src"
+        --workdir "/src/${{ github.repository }}/pkgbuilds"
         ghcr.io/fwcd/archlinux
         ./build-db
     - name: Output build trees for debugging

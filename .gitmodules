@@ -1,3 +1,3 @@
 [submodule "src"]
-	path = src
-	url = ../arch-repo.git
+	path = pkgbuilds
+	url = ../pkgbuilds.git
